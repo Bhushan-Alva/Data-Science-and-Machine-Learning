@@ -1,0 +1,75 @@
+--create user sql_lab identified by sql_lab;
+
+--grant connect, resource to sql_lab;
+
+
+--************************************************************************************************************************************
+--create tables;
+
+CREATE TABLE Emp (
+    Empno NUMBER(4) NOT NULL,
+    Ename VARCHAR2(10),
+    Job VARCHAR2(9),
+    Mgr NUMBER(4),
+    Hiredate DATE,
+    Sal NUMBER(7,2),
+    Comm NUMBER(7,2),
+    Deptno NUMBER(2)
+);
+
+CREATE TABLE Designation_Masters (
+    Design_code NUMBER(3) NOT NULL,
+    Design_name VARCHAR2(50)
+);
+
+CREATE TABLE Department_Masters (
+    Dept_Code NUMBER(2) NOT NULL,
+    Dept_name VARCHAR2(50)
+);
+
+CREATE TABLE Student_Masters (
+    Student_Code NUMBER(6) NOT NULL,
+    Student_name VARCHAR2(50) NOT NULL,
+    Dept_Code NUMBER(2),
+    Student_dob DATE,
+    Student_Address VARCHAR2(240)
+);
+ 
+CREATE TABLE Student_Marks (
+    Student_Code NUMBER(6),
+    Student_Year NUMBER NOT NULL,
+    Subject1 NUMBER(3),
+    Subject2 NUMBER(3),
+    Subject3 NUMBER(3)
+);
+
+CREATE TABLE Staff_Masters (
+    Staff_code NUMBER(8) NOT NULL,
+    Staff_Name VARCHAR2(50) NOT NULL,
+    Design_code NUMBER,
+    Dept_code NUMBER,
+    HireDate DATE,
+    Staff_dob DATE,
+    Staff_address VARCHAR2(240),
+    Mgr_code NUMBER(8),
+    Staff_sal NUMBER(10,2)
+);
+
+CREATE TABLE Book_Masters (
+    Book_Code NUMBER(10) NOT NULL,
+    Book_Name VARCHAR2(50) NOT NULL,
+    Book_pub_year NUMBER,
+    Book_pub_author VARCHAR2(50) NOT NULL
+);
+
+CREATE TABLE Book_Transactions (
+    Book_Code NUMBER,
+    Student_code NUMBER,
+    Staff_code NUMBER,
+    Book_Issue_date DATE NOT NULL,
+    Book_expected_return_date DATE NOT NULL,
+    Book_actual_return_date DATE
+);
+
+
+*****************************************************************************************************************************************
