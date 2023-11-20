@@ -1,0 +1,25 @@
+CREATE OR REPLACE TRIGGER check_account_constraints
+BEFORE INSERT OR UPDATE ON Account_Masters
+FOR EACH ROW
+DECLARE
+    v_min_savings_balance NUMBER := 5000;
+BEGIN
+    IF :NEW.Account_Type = 'SAV' THEN
+        -- Check for minimum savings balance
+        IF :NEW.Ledger_Balance < v_min_savings_balance THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Minimum savings balance should be ' || v_min_savings_balance);
+        END IF;
+    ELSIF :NEW.Account_Type = 'SAL' THEN
+        -- You can add additional constraints for Salary accounts if needed
+        -- For example, ensuring that Ledger_Balance >= 0 for Salary accounts
+        IF :NEW.Ledger_Balance < 0 THEN
+            RAISE_APPLICATION_ERROR(-20002, 'Salary account balance should be non-negative.');
+        END IF;
+    ELSE
+        -- Invalid Account_Type
+        RAISE_APPLICATION_ERROR(-20003, 'Invalid Account_Type.');
+    END IF;
+
+    -- Additional checks based on Customer_Type can be added here if needed
+END;
+/
